@@ -450,4 +450,25 @@ class Circuit():
 
 
 ###############################################################################################################################
+
+    def deleteGate(self, fromIndex, toIndex=None):
+        """
+        deletes a gate from the circuit.data list
+
+        Parameters
+        ----------
+        fromIndex : int
+            The starting index to delete from
+        toIndex : int (optional)
+            The ending index (this index will be deleted)
+        """
+        # using slice to be able to delete open-controlled gates
+        # to represent open-controlled gates, we add not gate before and after a closed-control
+        # ex.. to delete "●○.X" we need to delete 3 nodes from the list
+        #numberOfNodes = (numOfOpenControls*2)+1
+        if toIndex == None:
+            toIndex = fromIndex
+        self.circuit.data.pop(slice(fromIndex, toIndex+1))
+
+
 ###############################################################################################################################
