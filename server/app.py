@@ -48,6 +48,23 @@ def addGate():
 ###############################################################################################################################
 
 
+@app.route('/deleteGate', methods=['GET', 'POST'])
+def deleteGate():
+    if request.method == 'POST':
+        receivedDictionary = request.get_json()
+        # receivedDictionary must contaians at least "fromIndex"
+        # ex.. {"fromIndex" : int, "toIndex" : int}
+
+        fromIndex = receivedDictionary["fromIndex"]
+        if "toIndex" in receivedDictionary:
+            toIndex = receivedDictionary["toIndex"]
+            c.deleteGate(fromIndex, toIndex)
+        else:
+            c.deleteGate(fromIndex)
+
+###############################################################################################################################
+
+
 @app.route('/draggableCircuit', methods=['GET', 'POST'])
 def draggableCircuit():
     if request.method == 'POST':
