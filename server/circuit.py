@@ -422,17 +422,17 @@ class Circuit():
         if gateName[0] == "●" or gateName[0] == "○":
             dotPos = gateName.find('.')
             numOfControls = dotPos
-            name = gateName[dotPos+1]
+            name = gateName[dotPos+1:]
 
         # gates with angles {rx, ry, rz}
-        if name[0] == "r":
+        if name[0].upper() == "R":
             gate = self.gatesWithAngles(name)
         # standard and custom gates
         else:
             gate = self.gatesObjects[name]
 
         if numOfControls > 0:
-            gate = gate.controls(numOfControls)
+            gate = gate.control(numOfControls)
 
         # inserting the gate into circuit.data list
         self.addGateObject(gate, listIndex, wires)
